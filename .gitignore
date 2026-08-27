@@ -6,6 +6,9 @@ __pycache__/
 # Credentials Gmail
 credentials.json
 
+# Arquivo main
+main.py
+
 # C extensions
 *.so
 
