@@ -1,0 +1,17 @@
+# Changelog
+
+## [0.2.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.1.0...v0.2.0) (2026-08-27)
+
+
+### Features
+
+* **sanitize:** Capturadores de erros adicionados ([ab4f145](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/ab4f145c1e0fc9cfa6a19ad4f632c3b3289e0d8f))
+* **sanitize:** Capturadores de erros adicionados ([7a24a8e](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/7a24a8e2a5dea21cfd475c7c32ea98ae47d2fbb3))
+* **sanitize:** Função get_sanitize adicionada ([1406545](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/14065455ff27d9f0889a26f959bd76f7945bdf16))
+* **sanitize:** Função get_sanitize adicionada ([ea6e3eb](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/ea6e3ebea2c3f1e75bf4b03713a394bb1dcf7fd7))
+
+
+### Documentation
+
+* **sanitize:** Docstring adicionada ([90ff81d](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/90ff81d5d268d7b69a4c662a7d578e0bed37b495))
+* **sanitize:** Docstring adicionada ([71ba348](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/71ba348787836bda6ed92408a46982ef022d8aff))
