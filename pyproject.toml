@@ -6,7 +6,7 @@ authors = [
     {name = "jcarlossc",email = "jcarlossc1977@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.11,<4.0"
 dependencies = [
 ]
 
@@ -23,5 +23,6 @@ dev = [
     "ruff (>=0.16.4,<0.17.0)",
     "pytest (>=9.1.1,<10.0.0)",
     "pytest-cov (>=7.1.0,<8.0.0)",
-    "pre-commit (>=4.6.2,<5.0.0)"
+    "pre-commit (>=4.6.2,<5.0.0)",
+    "taskipy (>=1.14.1,<2.0.0)"
 ]
