@@ -33,6 +33,6 @@ def sanitize_filename(filename: str) -> str:
     ).strip()
 
     if not sanitized:
-        raise ValueError("filename não pode ser vazio.")    
+        raise ValueError("filename não pode ser vazio.")
 
     return sanitized
