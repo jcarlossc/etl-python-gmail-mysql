@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.2](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.4.1...v0.4.2) (2026-08-28)
+
+
+### Bug Fixes
+
+* **logger:** Função logger modificada ([09c1af3](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/09c1af3ae40e95083527f2c08bfd9913378f6a0b))
+* **logger:** Função logger modificada ([3240726](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/32407265de54f4b113e90fd4a076ade519bc87ec))
+
 ## [0.4.1](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.4.0...v0.4.1) (2026-08-28)
 
 
