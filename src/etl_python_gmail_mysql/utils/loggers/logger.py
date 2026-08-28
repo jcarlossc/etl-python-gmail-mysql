@@ -70,6 +70,7 @@ def setup_logger(logging_config: dict[str, Any]) -> None:
                 # permitindo acompanhar a execução em tempo real.
                 logging.StreamHandler(),
             ],
+            force=True,
         )
 
         logger.info("Logger configurado com sucesso.")
