@@ -1,0 +1,7 @@
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
+  encoding: "utf-8"
+
+logs:
+  file: "logs/app.log"
