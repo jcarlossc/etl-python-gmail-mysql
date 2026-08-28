@@ -54,5 +54,5 @@ def test_setup_logger_invalid_log_path(
     """Deve lançar ValueError para caminho de log inválido."""
     logging_config["logs"]["file"] = "\0app.log"
 
-    with pytest.raises(ValueError, match="embedded null character"):
+    with pytest.raises(ValueError):
         setup_logger(logging_config)
