@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.3.0...v0.3.1) (2026-08-28)
+
+
+### Documentation
+
+* **get_yaml:** Comentários e docstring adicionados ([ca878f9](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/ca878f96f9c6d9b90c77a5b017b9df380d17d5f8))
+* **get_yaml:** Comentários e docstring adicionados ([5d7ff3a](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/5d7ff3a66b2eb40ab42d823868e6ab08422b931a))
+
 ## [0.3.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.2.0...v0.3.0) (2026-08-28)
 
 
