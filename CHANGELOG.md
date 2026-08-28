@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.2.0...v0.3.0) (2026-08-28)
+
+
+### Features
+
+* **load_yaml:** Função get_yaml adicionada ([9808e33](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/9808e33045a600af57c33a0194fed85514945668))
+* **load_yaml:** Função get_yaml adicionada ([6184765](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/6184765bc35c74c6721e64341d9a6bea1cb6b5da))
+* **load_yaml:** Função get_yaml adicionada ([11f0fd6](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/11f0fd664fa77c4916ef1ead6ffc586f037d33e2))
+
 ## [0.2.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.1.0...v0.2.0) (2026-08-27)
 
 
