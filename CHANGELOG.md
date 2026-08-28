@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.3](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.4.2...v0.4.3) (2026-08-28)
+
+
+### Bug Fixes
+
+* **logger:** Teste unitário modificado ([6bb9600](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/6bb9600f8265b81756b24009c0dd6a9599a18cee))
+
 ## [0.4.2](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.4.1...v0.4.2) (2026-08-28)
 
 
