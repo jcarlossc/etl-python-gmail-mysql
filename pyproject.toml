@@ -8,8 +8,12 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.11,<4.0"
 dependencies = [
-    "pyyaml (>=6.0.3,<7.0.0)"
+    "pyyaml (>=6.0.3,<7.0.0)",
+    "pydantic-settings (>=2.15.0,<3.0.0)"
 ]
+
+[tool.mypy]
+plugins = ["pydantic.mypy"]
 
 [tool.poetry]
 packages = [{include = "etl_python_gmail_mysql", from = "src"}]
