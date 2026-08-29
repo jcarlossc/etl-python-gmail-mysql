@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.5.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.4.3...v0.5.0) (2026-08-29)
+
+
+### Features
+
+* **Settings:** Configuração de variáveis de ambiente ([0ec6242](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/0ec62425f28d55cadca30e27290e0d7e13ebf365))
+* **Settings:** Configuração de variáveis de ambiente ([b21555c](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/b21555c5d2c6e83ac9a91dac7021f3b9e5350384))
+
 ## [0.4.3](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.4.2...v0.4.3) (2026-08-28)
 
 
