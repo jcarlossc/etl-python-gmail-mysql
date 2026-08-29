@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.6.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.5.0...v0.6.0) (2026-08-29)
+
+
+### Features
+
+* **files_exists:** Função de verificação adicionada ([6463f4b](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/6463f4b81f14688e2bbe662b421955acd8637e69))
+* **files_exists:** Função de verificação adicionada ([ae92c6d](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/ae92c6d4d20432f7557be680b7f0e2e654d86fb1))
+
 ## [0.5.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.4.3...v0.5.0) (2026-08-29)
 
 
