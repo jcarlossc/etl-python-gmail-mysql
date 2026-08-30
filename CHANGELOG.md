@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.7.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.6.1...v0.7.0) (2026-08-30)
+
+
+### Features
+
+* **Retry:** Função retry adicionada ([663b0cd](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/663b0cd9acf80811390ec025ae66269106782b06))
+* **Retry:** Função retry adicionada ([1ef32f0](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/1ef32f082a964115171c98c9f5617fdaa12cd853))
+
+
+### Bug Fixes
+
+* **Retry:** Função retry modificada ([c9075bf](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/c9075bf7e43d4bbc340de8f0704a31761ab66384))
+* **Retry:** Imports retry modificado ([daf6adb](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/daf6adb53bfbf809e2c8ec29cc6dc6c082f1af6a))
+
 ## [0.6.1](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.6.0...v0.6.1) (2026-08-29)
 
 
