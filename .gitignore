@@ -6,6 +6,9 @@ __pycache__/
 # Credentials Gmail
 credentials.json
 
+# Token Gmail
+token.json
+
 # Arquivo main
 main.py
 
