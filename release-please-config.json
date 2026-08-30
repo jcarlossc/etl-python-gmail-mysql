@@ -2,7 +2,7 @@
   "release-type": "python",
   "packages": {
     ".": {
-      "package-name": "etl-python-ibge"
+      "package-name": "etl-python-gmail-mysql"
     }
   },
   "include-component-in-tag": false,
