@@ -1,17 +1,14 @@
-import time
+from typing import Any
 from collections.abc import Callable
-from typing import TypeVar
-
-
-T = TypeVar("T")
+import time
 
 
 def retry(
-    func: Callable[[], T],
+    func: Callable[[], Any],
     exceptions: tuple[type[Exception], ...],
     max_attempts: int = 3,
     delay: float = 1.0,
-) -> T:
+) -> Any:
     if max_attempts < 1:
         raise ValueError("max_attempts deve ser maior ou igual a 1.")
 
