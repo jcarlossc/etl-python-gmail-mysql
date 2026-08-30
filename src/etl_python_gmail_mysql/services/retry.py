@@ -1,6 +1,6 @@
-from typing import Any
-from collections.abc import Callable
 import time
+from collections.abc import Callable
+from typing import Any
 
 
 def retry(
