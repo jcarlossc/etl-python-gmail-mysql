@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.8.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.7.1...v0.8.0) (2026-08-30)
+
+
+### Features
+
+* **Authentication:** Função gmail authentication adicionada ([b09e6e0](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/b09e6e0e632c2ad82342a22fd6f8fd8b6039ef7a))
+* **Authentication:** Função gmail authentication adicionada ([2f21f44](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/2f21f4492f2a078ffe5f77af3dd52a42df1311f1))
+* **Authentication:** Função gmail authentication adicionada ([12afc10](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/12afc10ba92a2fb9da8fff603e69330f239d9685))
+
+
+### Bug Fixes
+
+* **Authentication:** Arquivo pyproject modificado ([724c074](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/724c0747f85f1cd832f155c8e15a4379767ef963))
+
 ## [0.7.1](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.7.0...v0.7.1) (2026-08-30)
 
 
