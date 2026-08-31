@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.10.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.9.0...v0.10.0) (2026-08-31)
+
+
+### Features
+
+* **Labels:** função labels adicionada ([123babd](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/123babd685539b8d07aa4b83589111fc98bd765c))
+* **Labels:** função labels adicionada ([582ccf7](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/582ccf72b3af13df92853908345a7be5fc21cd2b))
+
 ## [0.9.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.8.1...v0.9.0) (2026-08-30)
 
 
