@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.17.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.16.0...v0.17.0) (2026-08-31)
+
+
+### Features
+
+* **Messages:** Função messages adicionada ([e17f01c](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/e17f01c63d8b25f27a1bb4b8769ac7ee649ef8e6))
+* **Messages:** Função messages adicionada ([a1be3fc](https://github.com/jcarlossc/etl-python-gmail-mysql/commit/a1be3fc02042c8449561d31bc2eb7d8f89957374))
+
 ## [0.16.0](https://github.com/jcarlossc/etl-python-gmail-mysql/compare/v0.15.0...v0.16.0) (2026-08-31)
 
 
