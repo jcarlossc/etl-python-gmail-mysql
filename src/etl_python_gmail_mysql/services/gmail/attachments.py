@@ -1,9 +1,8 @@
 import base64
-
-# import re
+import logging
 from datetime import datetime
 from pathlib import Path
-import logging
+
 
 from etl_python_gmail_mysql.utils.sanitize.get_sanitize import sanitize_filename
 from googleapiclient.discovery import Resource
