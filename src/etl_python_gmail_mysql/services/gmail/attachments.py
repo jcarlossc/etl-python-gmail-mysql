@@ -1,11 +1,11 @@
 import base64
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
+from googleapiclient.discovery import Resource
 
 from etl_python_gmail_mysql.utils.sanitize.get_sanitize import sanitize_filename
-from googleapiclient.discovery import Resource
 
 
 def save_attachments(
@@ -62,12 +62,13 @@ def save_attachments(
         if internal_date:
             message_datetime = datetime.fromtimestamp(
                 int(internal_date) / 1000,
+                tz=timezone.utc,
             )
 
             timestamp = message_datetime.strftime("%Y_%m_%d_%H_%M_%S")
 
         else:
-            timestamp = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+            timestamp = datetime.now(timezone.utc).strftime("%Y_%m_%d_%H_%M_%S")
 
         parts = payload.get(
             "parts",
@@ -124,7 +125,7 @@ def save_attachments(
 
         logger.info(f"Anexo baixado com sucesso: {new_filename}")
 
-        logger.info("Término do download dos anexos")
+        logger.info("Término dos downloads dos anexos")
 
         return saved_files
 
