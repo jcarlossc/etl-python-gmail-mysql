@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from googleapiclient.discovery import Resource
@@ -22,6 +23,10 @@ def get_messages(
         RuntimeError: Se ocorrer erro durante a consulta à Gmail API.
     """
 
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando aquisição de mensagens de labels")
+
     try:
         # Consulta as mensagens associadas à label informada.
         response = (
@@ -33,6 +38,8 @@ def get_messages(
             )
             .execute()
         )
+
+        logger.info("Mensagens adiquiridas com sucesso")
 
         # Retorna as mensagens encontradas.
         # Caso a API não retorne a chave "messages",
