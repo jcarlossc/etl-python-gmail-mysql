@@ -1,6 +1,6 @@
 import logging
-from pathlib import Path
 import shutil
+from pathlib import Path
 
 
 def move_to_staging(
