@@ -1,3 +1,4 @@
+import logging
 from googleapiclient.discovery import Resource
 
 
@@ -20,6 +21,10 @@ def get_label_id(
             um erro ao consultar a API do Gmail.
     """
 
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando aquisição de ID de labels")
+
     try:
         # Consulta as labels disponíveis na conta autenticada.
         response = service.users().labels().list(userId="me").execute()
@@ -27,6 +32,8 @@ def get_label_id(
         # Procura pela label utilizando o nome informado.
         for label in response["labels"]:
             if label["name"] == label_name:
+                logger.info(f"Labels adiquiridas con sucesso: {label_name}")
+
                 return label["id"]
 
         # Nenhuma label correspondente foi encontrada.
