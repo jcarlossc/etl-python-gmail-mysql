@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 from google.auth.transport.requests import Request
@@ -33,6 +34,10 @@ def get_gmail_service(
         ValueError: Se as credenciais não puderem ser carregadas.
         OSError: Se houver erro ao ler ou gravar arquivos.
     """
+
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando autenticação no Gmail")
 
     # Garante que o diretório base exista.
     base_dir.mkdir(
@@ -72,6 +77,8 @@ def get_gmail_service(
                 credentials.to_json(),
                 encoding="utf-8",
             )
+
+        logger.info("Gmail autenticado com sucesso")
 
         return build(
             "gmail",
