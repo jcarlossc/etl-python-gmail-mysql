@@ -9,6 +9,9 @@ credentials.json
 # Token Gmail
 token.json
 
+# Diretórios data
+data/
+
 # Arquivo main
 main.py
 
