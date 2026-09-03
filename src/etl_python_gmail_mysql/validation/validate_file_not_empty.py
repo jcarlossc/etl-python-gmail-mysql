@@ -17,7 +17,22 @@ def get_validate_file_not_empty(
 
     logger = logging.getLogger(__name__)
 
-    logger.info("Iniciando validação de arquivos não vazios")
+    logger.info("Iniciando validação de arquivo não vazio")
 
-    # Obtém o tamanho do arquivo em bytes.
-    return file_path.stat().st_size > 0
+    try:
+        # Obtém o tamanho do arquivo em bytes.
+        return file_path.stat().st_size > 0
+
+    except FileNotFoundError:
+        # Arquivo inexistente é considerado inválido.
+        logger.warning("Arquivo não encontrado: %s", file_path)
+        return False
+
+    except OSError as exc:
+        # Trata outros erros relacionados ao sistema de arquivos.
+        logger.error(
+            "Erro ao acessar o arquivo %s: %s",
+            file_path,
+            exc,
+        )
+        return False
