@@ -2,7 +2,7 @@ import logging
 from pathlib import Path
 
 
-def validate_file_extension(
+def get_validate_file_extension(
     file_path: Path,
 ) -> bool:
     """
