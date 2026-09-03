@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from etl_python_gmail_mysql.validation.validate_file_extension import (
-    validate_file_extension,
+    get_validate_file_extension,
 )
 
 
@@ -10,7 +10,7 @@ def test_validate_file_extension_csv() -> None:
 
     file_path = Path("vendas.csv")
 
-    result = validate_file_extension(file_path)
+    result = get_validate_file_extension(file_path)
 
     assert result is True
 
@@ -20,7 +20,7 @@ def test_validate_file_extension_xlsx() -> None:
 
     file_path = Path("vendas.xlsx")
 
-    result = validate_file_extension(file_path)
+    result = get_validate_file_extension(file_path)
 
     assert result is True
 
@@ -30,7 +30,7 @@ def test_validate_file_extension_csv_maiusculo() -> None:
 
     file_path = Path("vendas.CSV")
 
-    result = validate_file_extension(file_path)
+    result = get_validate_file_extension(file_path)
 
     assert result is True
 
@@ -40,7 +40,7 @@ def test_validate_file_extension_xlsx_maiusculo() -> None:
 
     file_path = Path("vendas.XLSX")
 
-    result = validate_file_extension(file_path)
+    result = get_validate_file_extension(file_path)
 
     assert result is True
 
@@ -50,7 +50,7 @@ def test_validate_file_extension_extensao_nao_suportada() -> None:
 
     file_path = Path("vendas.pdf")
 
-    result = validate_file_extension(file_path)
+    result = get_validate_file_extension(file_path)
 
     assert result is False
 
@@ -60,6 +60,6 @@ def test_validate_file_extension_sem_extensao() -> None:
 
     file_path = Path("vendas")
 
-    result = validate_file_extension(file_path)
+    result = get_validate_file_extension(file_path)
 
     assert result is False
