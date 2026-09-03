@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 
@@ -16,6 +17,10 @@ def get_validate_file_exists(
     Raises:
         TypeError: Se file_path não for uma instância de Path.
     """
+
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando validação de existência de arquivo")
 
     try:
         # Garante que o parâmetro recebido seja um objeto Path.
