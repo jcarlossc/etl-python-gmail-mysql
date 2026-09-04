@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from etl_python_gmail_mysql.validation.validation_csv import get_validate_csv
+from etl_python_gmail_mysql.validation.validation_csv import get_validation_csv
 
 
 def test_validate_csv_com_dados_validos(tmp_path):
@@ -13,7 +13,7 @@ def test_validate_csv_com_dados_validos(tmp_path):
         encoding="utf-8",
     )
 
-    df = get_validate_csv(file_path)
+    df = get_validation_csv(file_path)
 
     assert isinstance(df, pd.DataFrame)
     assert len(df) == 2
@@ -28,7 +28,7 @@ def test_validate_csv_arquivo_nao_existe(tmp_path):
         FileNotFoundError,
         match="Arquivo não encontrado",
     ):
-        get_validate_csv(file_path)
+        get_validation_csv(file_path)
 
 
 def test_validate_csv_extensao_invalida(tmp_path):
@@ -44,7 +44,7 @@ def test_validate_csv_extensao_invalida(tmp_path):
         ValueError,
         match="Extensão não suportada",
     ):
-        get_validate_csv(file_path)
+        get_validation_csv(file_path)
 
 
 def test_validate_csv_arquivo_vazio(tmp_path):
@@ -57,4 +57,4 @@ def test_validate_csv_arquivo_vazio(tmp_path):
         ValueError,
         match="Arquivo vazio",
     ):
-        get_validate_csv(file_path)
+        get_validation_csv(file_path)

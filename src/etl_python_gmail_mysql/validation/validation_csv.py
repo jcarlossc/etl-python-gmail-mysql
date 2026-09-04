@@ -13,7 +13,7 @@ from etl_python_gmail_mysql.validation.validate_file_not_empty import (
 )
 
 
-def get_validate_csv(
+def get_validation_csv(
     file_path: Path,
 ) -> pd.DataFrame:
     """
