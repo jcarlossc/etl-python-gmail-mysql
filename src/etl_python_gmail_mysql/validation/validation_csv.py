@@ -1,13 +1,13 @@
 from pathlib import Path
 
 import pandas as pd
-from etl_python_gmail_mysql.validation.validation_file_exists import (
+from etl_python_gmail_mysql.validation.validate_file_exists import (
     get_validate_file_exists,
 )
-from etl_python_gmail_mysql.validation.validation_file_extension import (
+from etl_python_gmail_mysql.validation.validate_file_extension import (
     get_validate_file_extension,
 )
-from etl_python_gmail_mysql.validation.validation_file_not_empty import (
+from etl_python_gmail_mysql.validation.validate_file_not_empty import (
     get_validate_file_not_empty,
 )
 
