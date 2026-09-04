@@ -6,15 +6,12 @@ import pandas as pd
 from etl_python_gmail_mysql.validation.validate_file_exists import (
     get_validate_file_exists,
 )
-from etl_python_gmail_mysql.validation.validate_file_extension import (
-    get_validate_file_extension,
-)
 from etl_python_gmail_mysql.validation.validate_file_not_empty import (
     get_validate_file_not_empty,
 )
 
 
-def get_validate_xlsx(
+def get_validation_xlsx(
     file_path: Path,
 ) -> pd.DataFrame:
     """
@@ -41,7 +38,7 @@ def get_validate_xlsx(
         raise FileNotFoundError(f"Arquivo não encontrado: {file_path}")
 
     # Verifica se a extensão do arquivo é suportada.
-    if not get_validate_file_extension(file_path):
+    if file_path.suffix.lower() != ".xlsx":
         raise ValueError(f"Extensão não suportada: {file_path.suffix}")
 
     # Impede o processamento de arquivos vazios.
@@ -52,10 +49,10 @@ def get_validate_xlsx(
         # Carrega a planilha XLSX em um DataFrame.
         df = pd.read_excel(file_path)
 
-        logger.info("Validação dos arquivos XLSX realizada com sucesso.")
-
     except Exception as exc:
         # Converte o erro de leitura para uma exceção da aplicação.
         raise ValueError(f"Erro ao ler o XLSX: {file_path.name}") from exc
+
+    logger.info("Validação dos arquivos XLSX realizada com sucesso.")
 
     return df
