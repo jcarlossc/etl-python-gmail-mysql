@@ -1,3 +1,4 @@
+import logging
 from pathlib import Path
 
 import pandas as pd
@@ -31,6 +32,10 @@ def get_validation_csv(
             o arquivo estiver vazio ou ocorrer erro na leitura.
     """
 
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando validação dos arquivos CSV.")
+
     # Valida se o arquivo existe.
     if not get_validate_file_exists(file_path):
         raise FileNotFoundError(f"Arquivo não encontrado: {file_path}")
@@ -44,6 +49,8 @@ def get_validation_csv(
         raise ValueError(f"Arquivo vazio: {file_path.name}")
 
     try:
+        logger.info("Validação dos arquivos CSV realizada com sucesso")
+
         # Carrega o conteúdo do CSV em um DataFrame.
         df = pd.read_csv(file_path)
 
