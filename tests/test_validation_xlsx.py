@@ -1,11 +1,14 @@
 import pandas as pd
 import pytest
 
-from etl_python_gmail_mysql.validation.validation_xlsx import get_validation_xlsx
+from etl_python_gmail_mysql.validation.validation_xlsx import (
+    get_validation_xlsx,
+)
 
 
-def test_validate_xlsx_com_dados_validos(tmp_path):
-    """Deve carregar um XLSX válido em um DataFrame."""
+def test_validate_xlsx_sucesso(tmp_path):
+    """Deve validar e retornar um XLSX válido."""
+
     file_path = tmp_path / "vendas.xlsx"
 
     df_original = pd.DataFrame(
@@ -24,11 +27,15 @@ def test_validate_xlsx_com_dados_validos(tmp_path):
 
     assert isinstance(df, pd.DataFrame)
     assert len(df) == 2
-    assert list(df.columns) == ["produto", "quantidade"]
+    assert list(df.columns) == [
+        "produto",
+        "quantidade",
+    ]
 
 
-def test_validate_xlsx_arquivo_nao_existe(tmp_path):
-    """Deve lançar FileNotFoundError para arquivo inexistente."""
+def test_validate_xlsx_arquivo_inexistente(tmp_path):
+    """Deve rejeitar arquivo que não existe."""
+
     file_path = tmp_path / "vendas.xlsx"
 
     with pytest.raises(
@@ -40,6 +47,7 @@ def test_validate_xlsx_arquivo_nao_existe(tmp_path):
 
 def test_validate_xlsx_extensao_invalida(tmp_path):
     """Deve rejeitar arquivos com extensão não suportada."""
+
     file_path = tmp_path / "vendas.csv"
 
     file_path.write_text(
@@ -55,7 +63,8 @@ def test_validate_xlsx_extensao_invalida(tmp_path):
 
 
 def test_validate_xlsx_arquivo_vazio(tmp_path):
-    """Deve rejeitar arquivos XLSX vazios."""
+    """Deve rejeitar arquivo XLSX vazio."""
+
     file_path = tmp_path / "vendas.xlsx"
 
     file_path.touch()
@@ -63,5 +72,22 @@ def test_validate_xlsx_arquivo_vazio(tmp_path):
     with pytest.raises(
         ValueError,
         match="Arquivo vazio",
+    ):
+        get_validation_xlsx(file_path)
+
+
+def test_validate_xlsx_erro_leitura(tmp_path):
+    """Deve tratar erro ao tentar ler um XLSX inválido."""
+
+    file_path = tmp_path / "vendas.xlsx"
+
+    file_path.write_text(
+        "arquivo inválido",
+        encoding="utf-8",
+    )
+
+    with pytest.raises(
+        ValueError,
+        match="Erro ao ler o XLSX",
     ):
         get_validation_xlsx(file_path)

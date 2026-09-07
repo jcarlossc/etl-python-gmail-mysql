@@ -46,13 +46,13 @@ def get_validation_xlsx(
         raise ValueError(f"Arquivo vazio: {file_path.name}")
 
     try:
+        logger.info("Validação dos arquivos XLSX realizada com sucesso.")
+
         # Carrega a planilha XLSX em um DataFrame.
         df = pd.read_excel(file_path)
 
     except Exception as exc:
         # Converte o erro de leitura para uma exceção da aplicação.
         raise ValueError(f"Erro ao ler o XLSX: {file_path.name}") from exc
-
-    logger.info("Validação dos arquivos XLSX realizada com sucesso.")
 
     return df
