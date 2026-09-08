@@ -1,0 +1,15 @@
+sales_types:
+  id_venda: "Int64"
+  id_cliente: "Int64"
+  produto: "string"
+  quantidade: "Int64"
+  preco_unitario: "float64"
+  total: "float64"
+  data_venda: "datetime64[ns]"
+
+customer_types:
+  id_cliente: "Int64"
+  nome: "string"
+  email: "string"
+  cidade: "string"
+  estado: "string"
