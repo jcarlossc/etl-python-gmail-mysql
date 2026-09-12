@@ -4,7 +4,30 @@ import pandas as pd
 def get_create_star_schema(
     df_integrated: pd.DataFrame,
 ) -> dict[str, pd.DataFrame]:
+    """Cria as dimensões e a tabela fato do Star Schema.
+
+    A função recebe os dados de vendas integrados aos dados dos
+    clientes e cria as dimensões de cliente, produto e tempo,
+    além da tabela fato de vendas.
+
+    Args:
+        df_integrated: DataFrame contendo os dados de vendas
+            integrados aos dados dos clientes.
+
+    Returns:
+        Dicionário contendo:
+            - dim_cliente: dimensão de clientes.
+            - dim_produto: dimensão de produtos.
+            - dim_tempo: dimensão de tempo.
+            - fato_vendas: tabela fato de vendas.
+
+    Raises:
+        RuntimeError: Se ocorrer um erro durante a criação
+            do Star Schema.
+    """
+
     try:
+        # DIMENSÃO CLIENTE
         dim_cliente = (
             df_integrated[
                 [
@@ -19,12 +42,14 @@ def get_create_star_schema(
             .reset_index(drop=True)
         )
 
+        # Cria a chave substituta da dimensão.
         dim_cliente.insert(
             0,
             "sk_cliente",
             range(1, len(dim_cliente) + 1),
         )
 
+        # DIMENSÃO PRODUTO
         dim_produto = (
             df_integrated[
                 [
@@ -35,12 +60,14 @@ def get_create_star_schema(
             .reset_index(drop=True)
         )
 
+        # Cria a chave substituta da dimensão.
         dim_produto.insert(
             0,
             "sk_produto",
             range(1, len(dim_produto) + 1),
         )
 
+        # DIMENSÃO TEMPO
         dim_tempo = (
             df_integrated[
                 [
@@ -52,16 +79,19 @@ def get_create_star_schema(
             .reset_index(drop=True)
         )
 
+        # Cria atributos temporais para análise.
         dim_tempo["ano"] = dim_tempo["data_venda"].dt.year
         dim_tempo["mes"] = dim_tempo["data_venda"].dt.month
         dim_tempo["dia"] = dim_tempo["data_venda"].dt.day
 
+        # Cria a chave substituta da dimensão.
         dim_tempo.insert(
             0,
             "sk_tempo",
             range(1, len(dim_tempo) + 1),
         )
 
+        # TABELA FATO
         fato_vendas = df_integrated[
             [
                 "id_venda",
@@ -74,6 +104,8 @@ def get_create_star_schema(
             ]
         ].copy()
 
+        # Substitui as chaves naturais pelas chaves substitutas
+        # das dimensões.
         fato_vendas = fato_vendas.merge(
             dim_cliente[
                 [
@@ -110,6 +142,7 @@ def get_create_star_schema(
             validate="many_to_one",
         )
 
+        # Mantém somente as chaves das dimensões e as métricas.
         fato_vendas = fato_vendas[
             [
                 "id_venda",
