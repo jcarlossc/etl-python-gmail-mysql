@@ -15,7 +15,8 @@ dependencies = [
     "google-auth-oauthlib (>=1.4.1,<2.0.0)",
     "pandas (>=3.0.5,<4.0.0)",
     "pandas-stubs (>=3.0.5.260730,<4.0.0.0)",
-    "openpyxl (>=3.1.5,<4.0.0)"
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "sqlalchemy (>=2.0.52,<3.0.0)"
 ]
 
 [[tool.mypy.overrides]]
