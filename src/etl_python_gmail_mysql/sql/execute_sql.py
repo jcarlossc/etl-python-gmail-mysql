@@ -6,7 +6,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
 
 
-def execute_sql(
+def get_execute_sql(
     engine: Engine,
     sql_file: Path,
 ) -> None:
