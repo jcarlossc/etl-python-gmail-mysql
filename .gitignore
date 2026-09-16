@@ -12,9 +12,6 @@ token.json
 # Diretórios data
 data/
 
-# Arquivo main
-main.py
-
 # C extensions
 *.so
 
