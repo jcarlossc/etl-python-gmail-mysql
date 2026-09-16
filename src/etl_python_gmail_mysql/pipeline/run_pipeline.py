@@ -26,7 +26,6 @@ from etl_python_gmail_mysql.utils.yaml.get_yaml import load_all_configs
 from etl_python_gmail_mysql.validation.validation_csv import get_validation_csv
 from etl_python_gmail_mysql.validation.validation_xlsx import get_validation_xlsx
 
-
 logger = logging.getLogger(__name__)
 
 
