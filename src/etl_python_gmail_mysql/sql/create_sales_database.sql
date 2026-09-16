@@ -1,10 +1,10 @@
-DROP DATABASE IF EXISTS sales_database;
+DROP DATABASE IF EXISTS gmail_database;
 
-CREATE DATABASE sales_database
+CREATE DATABASE gmail_database
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
 
-USE sales_database;
+USE gmail_database;
 
 -- ==========================
 -- DIM_CLIENTE
