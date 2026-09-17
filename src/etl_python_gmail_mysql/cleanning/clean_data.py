@@ -1,3 +1,5 @@
+import logging
+
 import pandas as pd
 
 
@@ -19,6 +21,10 @@ def get_clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         ValueError: Se df estiver vazio.
         RuntimeError: Se ocorrer erro inesperado durante a limpeza.
     """
+
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando Limpeza de dados.")
 
     try:
         if not isinstance(df, pd.DataFrame):
@@ -66,6 +72,8 @@ def get_clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
         # Índice
         cleaned_df = cleaned_df.reset_index(drop=True)
+
+        logger.info("Limpeza de dados concluída com sucesso.")
 
         return cleaned_df
 
