@@ -1,5 +1,5 @@
-import logging
 import pandas as pd
+import logging
 
 
 def get_clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
