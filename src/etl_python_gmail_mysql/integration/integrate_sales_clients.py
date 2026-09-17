@@ -1,3 +1,5 @@
+import logging
+
 import pandas as pd
 
 
@@ -24,6 +26,10 @@ def get_integrate_sales_clients(
         RuntimeError: Se ocorrer um erro durante a integração.
     """
 
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando integração dos dados (Vendas - Clientes).")
+
     try:
         # Integra as vendas aos clientes pelo identificador do cliente.
         # many_to_one garante que cada cliente apareça uma única vez.
@@ -33,6 +39,8 @@ def get_integrate_sales_clients(
             how="left",
             validate="many_to_one",
         )
+
+        logger.info("Integração dos dados concluída com sucesso (Vendas - Clientes).")
 
         return df_integrated
 

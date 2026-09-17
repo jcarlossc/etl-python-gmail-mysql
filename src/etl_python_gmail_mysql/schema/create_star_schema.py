@@ -1,3 +1,5 @@
+import logging
+
 import pandas as pd
 
 
@@ -25,6 +27,10 @@ def get_create_star_schema(
         RuntimeError: Se ocorrer um erro durante a criação
             do Star Schema.
     """
+
+    logger = logging.getLogger(__name__)
+
+    logger.info("Iniciando criação de star schema.")
 
     try:
         # DIMENSÃO CLIENTE
@@ -154,6 +160,8 @@ def get_create_star_schema(
                 "total",
             ]
         ]
+
+        logger.info("Modelo star schema criado com sucesso.")
 
         return {
             "dim_cliente": dim_cliente,
