@@ -700,20 +700,20 @@ O mesmo padrão pode ser adaptado para diferentes fontes e formatos de dados.
 
 Este projeto demonstra conhecimentos práticos em:
 
-Engenharia de Dados;
-construção de pipelines ETL;
-integração com APIs;
-processamento de arquivos;
-tratamento e validação de dados;
-Python para dados;
-modelagem dimensional;
-bancos relacionais;
-SQL;
-automação;
-testes;
-qualidade de código;
-CI/CD;
-boas práticas de desenvolvimento.
+* Engenharia de Dados;
+* construção de pipelines ETL;
+* integração com APIs;
+* processamento de arquivos;
+* tratamento e validação de dados;
+* Python para dados;
+* modelagem dimensional;
+* bancos relacionais;
+* SQL;
+* automação;
+* testes;
+* qualidade de código;
+* CI/CD;
+* boas práticas de desenvolvimento.
 
 ## 🎯 Desenvolvedor focado em:
 
