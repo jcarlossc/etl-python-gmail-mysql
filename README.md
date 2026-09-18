@@ -641,7 +641,7 @@ para documentar as configurações necessárias sem expor credenciais.
 * Faça o download do arquivo JSON gerado.
 * Renomeie esse arquivo para credentials.json e coloque-o na raiz do projeto, e o mais IMPORTANTE: não versioná-lo, ou seja, colocá-lo no ```.gitignore```
 * Adicione um usuário de teste.
-* Obs: no primeiro acesso o Gmail pedirá confirmação de usuário pelo navegador e, após confirmação, um arquivo chamado ```token.json``` será criado na raiz do sistema e que também não deverá ser versionado.
+* Obs: no primeiro acesso, o Gmail pedirá confirmação de usuário pelo navegador e, após confirmação, um arquivo chamado ```token.json``` será criado na raiz do sistema, esse arquivo também não deverá ser versionado.
 
 2. Execute o XAMPP
 * Caso não o tenha, baixe-o: <a href="https://www.apachefriends.org/pt_br/download.html">https://www.apachefriends.org/pt_br/download.html</a>
