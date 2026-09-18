@@ -162,7 +162,7 @@ def get_run_pipeline() -> None:
             df_csv = get_validation_csv(file_path)
 
             logger.info(
-                "CSV validado: %s",
+                "DataFrame CSV validado: %s",
                 file_path.name,
             )
 
@@ -172,14 +172,14 @@ def get_run_pipeline() -> None:
             )
 
             logger.info(
-                "Tipos do CSV validados: %s",
+                "Tipos do DataFrame CSV validados: %s",
                 file_path.name,
             )
 
             df_csv_clean = get_clean_dataframe(df_csv_types)
 
             logger.info(
-                "Limpeza concluída: %s",
+                "Limpeza do DataFrame CSV concluída: %s",
                 file_path.name,
             )
 
@@ -195,7 +195,7 @@ def get_run_pipeline() -> None:
             df_xlsx = get_validation_xlsx(file_path)
 
             logger.info(
-                "XLSX validado: %s",
+                "DataFrame XLSX validado: %s",
                 file_path.name,
             )
 
@@ -205,14 +205,14 @@ def get_run_pipeline() -> None:
             )
 
             logger.info(
-                "Tipos do XLSX validados: %s",
+                "Tipos do DataFrame XLSX validados: %s",
                 file_path.name,
             )
 
             df_xlsx_clean = get_clean_dataframe(df_xlsx_types)
 
             logger.info(
-                "Limpeza concluída: %s",
+                "Limpeza do DataFrame XLSX concluída: %s",
                 file_path.name,
             )
 
@@ -226,7 +226,7 @@ def get_run_pipeline() -> None:
         # ---------------------------------------------------------
         # 8. Integração vendas + clientes
         # ---------------------------------------------------------
-        dados_integrados: list[pd.DataFrame] = []
+        integrated_data: list[pd.DataFrame] = []
 
         for periodo in sorted(vendas):
             if periodo not in clientes:
@@ -241,19 +241,19 @@ def get_run_pipeline() -> None:
                 df_clients=clientes[periodo],
             )
 
-            dados_integrados.append(df_integrated)
+            integrated_data.append(df_integrated)
 
             logger.info(
                 "Integração concluída: %s",
                 periodo,
             )
 
-        if not dados_integrados:
+        if not integrated_data:
             raise RuntimeError("Nenhum período válido foi integrado.")
 
         # Junta todos os períodos.
         df_integrado = pd.concat(
-            dados_integrados,
+            integrated_data,
             ignore_index=True,
         )
 
