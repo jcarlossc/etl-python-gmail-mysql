@@ -21,3 +21,573 @@ dados próximo a um cenário real de produção**.
 </div>
 
 ---
+
+## 📌 Visão geral
+
+O `etl_python_gmail_mysql` automatiza o processo de transformação de arquivos recebidos por e-mail em dados estruturados e prontos para análise.
+
+O fluxo contempla:
+
+```text
+Gmail
+   ↓
+Extração de anexos
+   ↓
+Staging
+   ↓
+Validação dos arquivos
+   ↓
+Padronização dos dados
+   ↓
+Limpeza e sanitização
+   ↓
+Integração de vendas + clientes
+   ↓
+Star Schema
+   ↓
+MySQL
+   ↓
+BI / Analytics
+```
+A aplicação também possui mecanismos de:
+
+* configuração externa;
+* logging;
+* retry;
+* validação de arquivos;
+* validação de tipos;
+* tratamento de CSV e XLSX;
+* sanitização de dados;
+* integração entre datasets;
+* criação do banco de dados;
+* criação do modelo dimensional;
+* testes automatizados;
+* análise de cobertura;
+* integração contínua.
+
+## 🏗️ Arquitetura do Pipeline
+
+Fluxo de processamento
+
+### 1. Extração do Gmail
+
+O pipeline utiliza a API do Gmail para:
+
+* autenticar a aplicação;
+* acessar mensagens de uma determinada label;
+* localizar mensagens disponíveis para processamento;
+* identificar anexos;
+* realizar o download dos arquivos.
+
+Principais componentes:
+```
+services/
+└── gmail/
+    ├── authentication.py
+    ├── labels.py
+    ├── messages.py
+    └── attachments.py
+```
+
+### 2. Staging
+
+Os arquivos extraídos do Gmail são armazenados em uma camada intermediária de staging.
+
+Essa etapa permite separar os dados recebidos da etapa de processamento.
+
+Exemplo:
+```
+data/
+├── downloads/
+├── stagings/
+│   ├── csv/
+│   └── xlsx/
+└── processed/
+```
+
+O staging funciona como uma área de preparação antes da validação e transformação dos dados.
+
+### 3. Validação dos arquivos
+
+Antes de processar os dados, o pipeline realiza validações relacionadas aos arquivos recebidos.
+
+São verificadas condições como:
+
+* existência do arquivo;
+* extensão permitida;
+* arquivo vazio;
+* estrutura do CSV;
+* estrutura do XLSX;
+* colunas esperadas;
+* consistência dos dados.
+
+Estrutura:
+```
+validation/
+├── validate_file_exists.py
+├── validate_file_extension.py
+├── validate_file_not_empty.py
+├── validation_csv.py
+└── validation_xlsx.py
+```
+
+Essa camada impede que arquivos inválidos avancem para as etapas seguintes do pipeline.
+
+### 4. Padronização dos dados
+
+Após a validação, os dados são carregados em DataFrames e têm seus tipos e estruturas padronizados.
+```
+standardization/
+└── validate_types.py
+```
+
+Essa etapa é importante para garantir consistência antes da integração dos datasets.
+
+### 5. Limpeza e sanitização
+
+Os dados passam por processos de limpeza e sanitização.
+
+Exemplos:
+
+* tratamento de nomes;
+* padronização de valores;
+* sanitização de campos;
+* normalização de informações;
+* preparação dos dados para integração.
+
+Estrutura:
+```
+cleanning/
+└── clean_data.py
+
+utils/
+├── clean/
+│   └── clean_name.py
+└── sanitize/
+    └── get_sanitize.py
+```
+
+Observação: o diretório cleanning mantém atualmente a nomenclatura utilizada no projeto. Em uma futura refatoração, pode ser renomeado para cleaning.
+
+### 6. Integração de vendas e clientes
+
+Após o tratamento individual dos datasets, os dados de vendas e clientes são integrados.
+```
+integration/
+└── integrate_sales_clients.py
+```
+
+A integração permite relacionar informações como:
+```
+Clientes
+   │
+   │ id_cliente
+   ↓
+Vendas
+```
+
+Essa etapa prepara os dados para a construção do modelo dimensional.
+
+## ⭐ Modelagem dimensional
+
+O projeto utiliza uma arquitetura baseada em Star Schema.
+```
+                 dim_cliente
+                     │
+                     │
+dim_tempo ───── fato_vendas ───── dim_produto
+                     │
+                     │
+                outras dimensões
+
+```
+
+O objetivo é organizar os dados de forma adequada para:
+
+* consultas analíticas;
+* criação de dashboards;
+* geração de KPIs;
+* relatórios;
+* ferramentas de Business Intelligence.
+
+A criação do modelo está centralizada em:
+```
+schema/
+└── create_star_schema.py
+```
+
+## 🗄️ Banco de dados MySQL
+
+O pipeline cria e utiliza um banco de dados MySQL para armazenamento dos dados processados.
+
+Componentes:
+```
+database/
+└── connection_db.py
+
+sql/
+├── create_sales_database.sql
+└── execute_sql.py
+```
+
+A camada de banco é responsável por:
+
+* estabelecer conexão;
+* executar scripts SQL;
+* criar estruturas necessárias;
+* persistir os dados;
+* encerrar conexões de forma segura.
+
+A conexão é realizada utilizando SQLAlchemy.
+
+## 🔄 Orquestração do pipeline
+
+A execução das etapas é centralizada no módulo:
+```
+pipeline/
+└── run_pipeline.py
+```
+O ponto de entrada da aplicação é:
+
+main.py
+
+Conceitualmente:
+```
+main.py
+   │
+   ↓
+run_pipeline()
+   │
+   ├── Configuração
+   ├── Logging
+   ├── Gmail
+   ├── Download
+   ├── Staging
+   ├── Validação
+   ├── Padronização
+   ├── Limpeza
+   ├── Integração
+   ├── Star Schema
+   ├── MySQL
+   └── Finalização
+```
+Isso mantém a execução do pipeline centralizada e facilita sua manutenção.
+
+## ⚙️ Configuração
+
+As configurações da aplicação são separadas do código.
+
+Principais recursos:
+```
+.env
+.env.example
+```
+e:
+```
+utils/
+├── settings/
+│   └── Settings.py
+└── yaml/
+    └── get_yaml.py
+```
+A utilização de arquivos de configuração permite alterar parâmetros do ambiente sem modificar diretamente a implementação.
+
+Exemplo:
+
+* DB_HOST=localhost
+* DB_PORT=3306
+* DB_USER=usuario
+* DB_PASSWORD=senha
+* DB_NAME=banco
+
+Nunca versione credenciais reais, tokens OAuth ou informações sensíveis.
+
+## 🔐 Autenticação Gmail
+
+A integração com o Gmail utiliza autenticação OAuth.
+
+Arquivos relacionados:
+
+* credentials.json
+* token.json
+
+Esses arquivos são específicos do ambiente e não devem ser publicados no GitHub.
+
+O repositório deve utilizar:
+```
+.env.example
+```
+como referência para as variáveis necessárias.
+
+## 📝 Logging
+
+O projeto possui uma camada dedicada de logging:
+```
+utils/
+└── loggers/
+    └── logger.py
+```
+Os eventos da aplicação são registrados em:
+```
+logs/
+└── app.log
+```
+O logging permite acompanhar:
+
+* início do pipeline;
+* execução das etapas;
+* erros;
+* exceções;
+* processamento dos arquivos;
+* operações no banco;
+* conclusão do pipeline.
+
+Exemplo conceitual:
+```
+2026-09-18 11:40:53,251 - INFO - etl_python_gmail_mysql.utils.loggers.logger - Logger configurado com sucesso.
+2026-09-18 11:41:25,722 - INFO - etl_python_gmail_mysql.pipeline.run_pipeline - Iniciando pipeline ETL.
+2026-09-18 11:41:25,816 - INFO - etl_python_gmail_mysql.pipeline.run_pipeline - Settings carregadas.
+2026-09-18 11:41:25,816 - INFO - etl_python_gmail_mysql.services.gmail.authentication - Iniciando autenticação no Gmail
+2026-09-18 11:41:25,831 - INFO - etl_python_gmail_mysql.services.gmail.authentication - Gmail autenticado com sucesso
+2026-09-18 11:41:25,941 - INFO - googleapiclient.discovery_cache - file_cache is only supported with oauth2client<4.0.0
+2026-09-18 11:41:26,034 - INFO - etl_python_gmail_mysql.pipeline.run_pipeline - Autenticação Gmail concluída.
+2026-09-18 11:41:26,034 - INFO - etl_python_gmail_mysql.services.gmail.labels - Iniciando aquisição de ID de labels
+2026-09-18 11:41:29,552 - INFO - etl_python_gmail_mysql.services.gmail.labels - Labels adiquiridas con sucesso: EMPRESA/01_ENTRADA
+2026-09-18 11:41:29,552 - INFO - etl_python_gmail_mysql.services.gmail.messages - Iniciando aquisição de mensagens de labels
+2026-09-18 11:41:29,896 - INFO - etl_python_gmail_mysql.services.gmail.messages - Mensagens adiquiridas com sucesso
+2026-09-18 11:41:29,896 - INFO - etl_python_gmail_mysql.pipeline.run_pipeline - Mensagens encontradas: 4
+2026-09-18 11:41:29,896 - INFO - etl_python_gmail_mysql.services.gmail.attachments - Iniciando download de anexos
+2026-09-18 11:41:30,599 - INFO - etl_python_gmail_mysql.services.gmail.attachments - Anexo salvo com sucesso: 2026_08_26_17_04_57_vendas_janeiro.csv
+2026-09-18 11:41:30,599 - INFO - etl_python_gmail_mysql.services.gmail.attachments - Término dos downloads dos anexos
+...
+```
+
+## 🔁 Retry
+
+Operações sujeitas a falhas temporárias possuem suporte a retry:
+```
+services/
+└── retry.py
+```
+O objetivo é aumentar a resiliência do pipeline em operações como:
+
+comunicação com APIs;
+conexão com serviços externos;
+comunicação com MySQL;
+operações sujeitas a falhas transitórias.
+
+## 🧪 Testes
+
+O projeto possui testes automatizados utilizando pytest.
+
+Estrutura:
+```
+tests/
+├── test_attachments.py
+├── test_authentication.py
+├── test_clean_data.py
+├── test_clean_names.py
+├── test_connection_db.py
+├── test_create_star_schema.py
+├── test_execute_sql.py
+├── test_files_exists.py
+├── test_get_sanitize.py
+├── test_get_staging.py
+├── test_get_yaml.py
+├── test_integrate_sales_clients.py
+├── test_labels.py
+├── test_logger.py
+├── test_main.py
+├── test_messages.py
+├── test_retry.py
+├── test_run_pipeline.py
+├── test_settings.py
+├── test_validate_csv.py
+├── test_validate_file_exists.py
+├── test_validate_file_extension.py
+├── test_validate_file_not_empty.py
+├── test_validate_types.py
+└── test_validation_xlsx.py
+```
+
+## 📁 Estrutura do projeto
+```
+etl_python_gmail_mysql/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── logs/
+│   └── app.log
+│
+├── src/
+│   └── etl_python_gmail_mysql/
+│       │
+│       ├── main.py
+│       ├── __init__.py
+│       │
+│       ├── cleanning/
+│       │   └── clean_data.py
+│       │
+│       ├── database/
+│       │   └── connection_db.py
+│       │
+│       ├── integration/
+│       │   └── integrate_sales_clients.py
+│       │
+│       ├── pipeline/
+│       │   └── run_pipeline.py
+│       │
+│       ├── schema/
+│       │   └── create_star_schema.py
+│       │
+│       ├── services/
+│       │   ├── retry.py
+│       │   └── gmail/
+│       │       ├── authentication.py
+│       │       ├── labels.py
+│       │       ├── messages.py
+│       │       └── attachments.py
+│       │
+│       ├── sql/
+│       │   ├── create_sales_database.sql
+│       │   └── execute_sql.py
+│       │
+│       ├── staging/
+│       │   └── get_staging.py
+│       │
+│       ├── standardization/
+│       │   └── validate_types.py
+│       │
+│       ├── utils/
+│       │   ├── clean/
+│       │   ├── files_exists/
+│       │   ├── loggers/
+│       │   ├── sanitize/
+│       │   ├── settings/
+│       │   └── yaml/
+│       │
+│       └── validation/
+│           ├── validate_file_exists.py
+│           ├── validate_file_extension.py
+│           ├── validate_file_not_empty.py
+│           ├── validation_csv.py
+│           └── validation_xlsx.py
+│
+├── tests/
+│   ├── test_attachments.py
+│   ├── test_authentication.py
+│   ├── test_clean_data.py
+│   ├── test_clean_names.py
+│   ├── test_connection_db.py
+│   ├── test_create_star_schema.py
+│   ├── test_execute_sql.py
+│   ├── test_files_exists.py
+│   ├── test_get_sanitize.py
+│   ├── test_get_staging.py
+│   ├── test_get_yaml.py
+│   ├── test_integrate_sales_clients.py
+│   ├── test_labels.py
+│   ├── test_logger.py
+│   ├── test_main.py
+│   ├── test_messages.py
+│   ├── test_retry.py
+│   ├── test_run_pipeline.py
+│   ├── test_settings.py
+│   ├── test_validate_csv.py
+│   ├── test_validate_file_exists.py
+│   ├── test_validate_file_extension.py
+│   ├── test_validate_file_not_empty.py
+│   ├── test_validate_types.py
+│   └── test_validation_xlsx.py
+│
+├── .env.example
+├── .gitignore
+├── .pre-commit-config.yaml
+├── CHANGELOG.md
+├── LICENSE
+├── poetry.lock
+├── pyproject.toml
+└── README.md
+```
+
+## ⚙️ Tecnologias
+| Tecnologia | Utilização |
+| ---------- | ---------- |
+| Python | Desenvolvimento do ETL |
+| Poetry | Gerenciamento de dependências |
+| Gmail API | Extração dos e-mails e anexo |
+| Pandas | Manipulação e transformação |
+| SQLAlchemy | Conexão com banco de dados |
+| MySQL | Armazenamento |
+| Pydantic | Settings	Configurações da aplicação |
+| PyYAML | Configurações YAML |
+| Pytest | Testes automatizados |
+| Pytest-Cov | Cobertura de testes |
+| Ruff | Linting e formatação |
+| MyPy | Verificação estática |
+| Pre-commit | Automação de validações |
+| GitHub Actions | CI/CD |
+| Release Please | Automatização de releases |
+| XAMPP | Servidor web local |
+
+## 🔎 Qualidade de código
+As validações são utilizadas para manter consistência, tipagem e qualidade do código.
+
+* App: Executa aplicação. ```poetry run task app```
+* Ruff:
+    * format: altera os arquivos para deixá-los formatados. ```poetry run task format```
+    * check: apenas verifica se os arquivos estão formatados. Não altera nada. ```poetry run task check```
+    * lint: procura problemas como imports incorretos, código desnecessário, variáveis não utilizadas, etc. ```poetry run task lint```
+    * fix: procura esses problemas e tenta corrigi-los automaticamente. ```poetry run task fix```
+* Pytest: executa testes unitários. ```poetry run task pytest```
+* Covhtml: executa os testes e gera relatório de cobertura em HTML. ```poetry run task covhtml```. (htmlcov//index.html) 
+* Covcmd: Executa testes mostrando cobertura no terminal. ```poetry run task covcmd```
+* Mypy: Faz verificação estática de tipos. ```poetry run task mypy```
+* Precommit</span>: Executa todos os hooks do pre-commit. ```poetry run task precommit```
+
+## 🔬 Qualidade e engenharia
+
+O projeto foi estruturado seguindo princípios de engenharia de software aplicados a pipelines de dados:
+
+* separação de responsabilidades;
+* arquitetura modular;
+* configuração externa;
+* tratamento de exceções;
+* logging;
+* retry;
+* validação de dados;
+* tipagem estática;
+* testes automatizados;
+* cobertura de testes;
+* linting;
+* formatação automática;
+* integração contínua;
+* versionamento;
+* automação de releases.
+
+🔐 Segurança
+
+Informações sensíveis não devem ser armazenadas no código-fonte.
+
+Arquivos como:
+
+.env
+credentials.json
+token.json
+
+devem permanecer protegidos e adicionados ao .gitignore.
+
+O repositório fornece:
+
+.env.example
+
+para documentar as configurações necessárias sem expor credenciais.
+
+
+
+
+
+
+
