@@ -22,6 +22,44 @@ dados próximo a um cenário real de produção**.
 
 ---
 
+## 📌 Imagens do Projeto
+<table>
+  <tr>
+    <td>
+      <figure>
+        <img src="https://github.com/jcarlossc/etl-python-gmail-mysql/blob/main/images/2a8d705c-a1ae-456c-86e8-133101834270.jpg" alt="Imagem Fluxo" width="250" target="_blank"/>
+        <figcaption>
+          <p><b>Diagrama</b></p>
+        </figcaption>
+      <figure>
+    </td>
+    <td>
+      <figure>
+        <img src="https://github.com/jcarlossc/etl-python-gmail-mysql/blob/main/images/cobertura.jpg" alt="Imagem Testes" width="250" target="_blank"/>
+        <figcaption>
+          <p><b>Cobertura de Testes</b></p>
+        </figcaption>
+      <figure>
+  </td>
+  <td>
+    <figure>
+      <img src="https://github.com/jcarlossc/etl-python-gmail-mysql/blob/main/images/pytest.PNG" alt="Imagem Testes" width="250" target="_blank" />
+      <figcaption>
+          <p><b>Pytest</b></p>
+      </figcaption>
+    <figure>
+  </td>
+   <td>
+      <figure>
+        <img src="https://github.com/jcarlossc/etl-python-gmail-mysql/blob/main/images/etk_python_gmail_mysql.jpg" alt="Imagem Fluxo" width="250" target="_blank"/>
+        <figcaption>
+          <p><b>Cobertura de Testes</b></p>
+        </figcaption>
+      <figure>
+  </td>
+  </tr>
+</table>
+
 ## 📌 Visão geral
 
 O `etl_python_gmail_mysql` automatiza o processo de transformação de arquivos recebidos por e-mail em dados estruturados e prontos para análise.
@@ -413,35 +451,36 @@ tests/
 ## 📁 Estrutura do projeto
 ```
 etl_python_gmail_mysql/
-│
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
-│
+├── config/
+│    ├── columns_types.yaml
+│    ├── gmail.yaml
+│    └── logging.yaml
+├── data/
+│    ├── downloads/
+│    └── stagings/
+│          ├── csv/
+│          └── xlsx
+├── htmlcov/
+├── images/
 ├── logs/
 │   └── app.log
-│
 ├── src/
 │   └── etl_python_gmail_mysql/
-│       │
 │       ├── main.py
 │       ├── __init__.py
-│       │
 │       ├── cleanning/
 │       │   └── clean_data.py
-│       │
 │       ├── database/
 │       │   └── connection_db.py
-│       │
 │       ├── integration/
 │       │   └── integrate_sales_clients.py
-│       │
 │       ├── pipeline/
 │       │   └── run_pipeline.py
-│       │
 │       ├── schema/
 │       │   └── create_star_schema.py
-│       │
 │       ├── services/
 │       │   ├── retry.py
 │       │   └── gmail/
@@ -449,32 +488,32 @@ etl_python_gmail_mysql/
 │       │       ├── labels.py
 │       │       ├── messages.py
 │       │       └── attachments.py
-│       │
 │       ├── sql/
 │       │   ├── create_sales_database.sql
 │       │   └── execute_sql.py
-│       │
 │       ├── staging/
 │       │   └── get_staging.py
-│       │
 │       ├── standardization/
 │       │   └── validate_types.py
-│       │
 │       ├── utils/
 │       │   ├── clean/
+│       │   │     └── clean_name.py
 │       │   ├── files_exists/
+│       │   │     └── get_file.py
 │       │   ├── loggers/
+│       │   │     └── logger.py
 │       │   ├── sanitize/
+│       │   │     └── get_sanitize.py
 │       │   ├── settings/
+│       │   │     └── Settings.py
 │       │   └── yaml/
-│       │
+│       │         └── get_yaml.py
 │       └── validation/
 │           ├── validate_file_exists.py
 │           ├── validate_file_extension.py
 │           ├── validate_file_not_empty.py
 │           ├── validation_csv.py
 │           └── validation_xlsx.py
-│
 ├── tests/
 │   ├── test_attachments.py
 │   ├── test_authentication.py
@@ -501,7 +540,6 @@ etl_python_gmail_mysql/
 │   ├── test_validate_file_not_empty.py
 │   ├── test_validate_types.py
 │   └── test_validation_xlsx.py
-│
 ├── .env.example
 ├── .gitignore
 ├── .pre-commit-config.yaml
@@ -567,7 +605,7 @@ O projeto foi estruturado seguindo princípios de engenharia de software aplicad
 * versionamento;
 * automação de releases.
 
-🔐 Segurança
+## 🔐 Segurança
 
 Informações sensíveis não devem ser armazenadas no código-fonte.
 
@@ -580,12 +618,124 @@ token.json
 devem permanecer protegidos e adicionados ao .gitignore.
 
 O repositório fornece:
-
+```
 .env.example
-
+```
 para documentar as configurações necessárias sem expor credenciais.
 
+## 🛠️ Modo de Utilização
+1. GMAIL API:
+* Logado com Gmail, Acesse: ```https://cloud.google.com/```
+* Clique no menu suspenso de projetos no topo da página e selecione Novo Projeto.
+* Digite um nome para o seu projeto e clique em Criar.
+* No menu lateral esquerdo, vá em APIs e Serviços e depois em Biblioteca.
+* Na barra de pesquisa, digite Gmail API.
+* Clique na API do Gmail e depois no botão Ativar.
+* Vá em APIs e Serviços > Tela de permissão OAuth.
+* Selecione o tipo de usuário como Interno ou Externo (use Externo se for para testes pessoais com contas livres) e clique em Criar.
+* Preencha o nome do aplicativo e o seu e-mail de suporte.
+* Avance pelas telas, adicione seu e-mail de contato e finalize a configuração.
+* No menu lateral, acesse Clientes dentro da seção de autenticação (ou Credenciais > Criar credenciais > ID do cliente OAuth).
+* Escolha o tipo de aplicativo como App para computador (Desktop app).
+* Dê um nome para a credencial e clique em Criar.
+* Faça o download do arquivo JSON gerado.
+* Renomeie esse arquivo para credentials.json e coloque-o na raiz do projeto, e o mais IMPORTANTE: não versioná-lo, ou seja, colocá-lo no ```.gitignore```
+* Adicione um usuário de teste.
+* Obs: no primeiro acesso o Gmail pedirá confirmação de usuário pelo navegador e, após confirmação, um arquivo chamado ```token.json``` será criado na raiz do sistema e que também não deverá ser versionado.
 
+2. Execute o XAMPP
+* Caso não o tenha, baixe-o: <a href="https://www.apachefriends.org/pt_br/download.html">https://www.apachefriends.org/pt_br/download.html</a>
+* Instale-o normalmente
+* Execute o Painel de Controle
+* Acione o Apache e o MySQL/MariaDB
+
+3. Com a linguagem Python instalada: <a href="https://www.python.org/downloads/" target="_blank">https://www.python.org/downloads/</a>
+* Instale o pipx:
+```
+pip install pipx
+```
+* Em seguida:
+```
+pipx ensurepath
+```
+* E, por fim, o gerenciador Poetry:
+```
+pipx install poetry
+```
+4. Clone o repositório e acesse o diretório
+```
+git clone https://github.com/jcarlossc/etl-python-gmail-mysql.git
+cd etl-python-gmail-mysql
+```
+* Instalação das dependências:
+```
+poetry install
+```
+* Para executar o projeto:
+```
+poetry run task app
+```
+
+## 📈 Possibilidades de utilização
+
+O pipeline pode servir como base para cenários em que arquivos são recebidos periodicamente por e-mail e precisam ser incorporados automaticamente a uma plataforma de dados.
+
+Exemplos:
+```
+E-commerce
+     ↓
+Relatórios de vendas
+     ↓
+Gmail
+     ↓
+ETL
+     ↓
+MySQL
+     ↓
+Power BI / Tableau / Qlik
+```
+O mesmo padrão pode ser adaptado para diferentes fontes e formatos de dados.
+
+## 🎯 Objetivos do projeto
+
+Este projeto demonstra conhecimentos práticos em:
+
+Engenharia de Dados;
+construção de pipelines ETL;
+integração com APIs;
+processamento de arquivos;
+tratamento e validação de dados;
+Python para dados;
+modelagem dimensional;
+bancos relacionais;
+SQL;
+automação;
+testes;
+qualidade de código;
+CI/CD;
+boas práticas de desenvolvimento.
+
+## 🎯 Desenvolvedor focado em:
+
+- Data Engineering
+- Analytics
+- R Programming
+- Python Programming
+- Automação de processos
+- Engenharia de Software
+
+## 📝 Contato
+* Autor: Carlos da Costa
+* Recife, PE - Brasil
+* Telefone: +55 81 99712 9140
+* Telegram: @jcarlossc
+* Blogger linguagem R: https://informaticus77-r.blogspot.com/
+* Blogger linguagem Python: https://informaticus77-python.blogspot.com/
+* Email: jcarlossc1977@gmail.com
+* LinkedIn: https://www.linkedin.com/in/carlos-da-costa-669252149/
+* GitHub: https://github.com/jcarlossc
+* Kaggle: https://www.kaggle.com/jcarlossc/
+* Twitter/X: https://x.com/jcarlossc1977
 
 
 
