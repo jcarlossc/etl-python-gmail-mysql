@@ -732,6 +732,7 @@ Este projeto demonstra conhecimentos práticos em:
 * Blogger linguagem R: https://informaticus77-r.blogspot.com/
 * Blogger linguagem Python: https://informaticus77-python.blogspot.com/
 * Email: jcarlossc1977@gmail.com
+* Tableau: https://public.tableau.com/app/profile/carlos.da.costa7416
 * LinkedIn: https://www.linkedin.com/in/carlos-da-costa-669252149/
 * GitHub: https://github.com/jcarlossc
 * Kaggle: https://www.kaggle.com/jcarlossc/
